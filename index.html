@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Your Video Link</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>Click the button below to get your video link.</p>
+    <button onclick="redirectToTelegram()">Get Link</button>
+
+    <script>
+        function redirectToTelegram() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            if (token) {
+                const telegramLink = `https://t.me/aman687_bot?start=${encodeURIComponent(token)}`;
+                window.location.href = telegramLink;
+            } else {
+                alert("No token found in URL");
+            }
+        }
+    </script>
+</body>
+</html>
