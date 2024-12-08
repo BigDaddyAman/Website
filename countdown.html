@@ -46,14 +46,30 @@
         button.show {
             display: inline-block;
         }
+        .link-button {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="https://i.ibb.co/JqSwfKv/your-image.jpg" alt="Image">
         <h1>Video Anda Sedia!</h1>
+        <p>Nama Fail: <span id="file-name"></span></p>
+        <p>Saiz Fail: <span id="file-size"></span></p>
+        <p>Tarikh Muat Naik: <span id="upload-date"></span></p>
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
+        <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
     </div>
 
     <script>
@@ -72,6 +88,16 @@
                     countdownElement.textContent = `Tolong tunggu ${seconds} saat...`;
                 }
             }, 1000);
+
+            // Fetch file details from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const fileName = urlParams.get('file_name');
+            const fileSize = urlParams.get('file_size');
+            const uploadDate = urlParams.get('upload_date');
+
+            document.getElementById('file-name').textContent = fileName;
+            document.getElementById('file-size').textContent = fileSize + " bytes";
+            document.getElementById('upload-date').textContent = uploadDate;
         }
 
         function redirectToTelegram() {
