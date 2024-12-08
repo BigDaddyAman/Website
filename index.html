@@ -23,6 +23,11 @@
         h1 {
             color: #007bff;
         }
+        #countdown {
+            font-size: 20px;
+            margin: 20px 0;
+            color: #ff0000;
+        }
         button {
             background-color: #007bff;
             color: #fff;
@@ -31,9 +36,10 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
+            display: none;
         }
-        button:hover {
-            background-color: #0056b3;
+        button.show {
+            display: inline-block;
         }
     </style>
 </head>
@@ -41,10 +47,31 @@
     <div class="container">
         <h1>Welcome!</h1>
         <p>Click the button below to get your video link.</p>
-        <button onclick="redirectToTelegram()">Get Link</button>
+        <button id="get-link" onclick="startCountdown()">Get Link</button>
+        <div id="countdown"></div>
+        <button id="get-file" onclick="redirectToTelegram()">GET FILE</button>
     </div>
 
     <script>
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const getLinkButton = document.getElementById('get-link');
+            const getFileButton = document.getElementById('get-file');
+            getLinkButton.classList.remove('show');
+            let seconds = 4;
+            countdownElement.textContent = `Please wait ${seconds} seconds...`;
+            let interval = setInterval(() => {
+                seconds--;
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    countdownElement.textContent = "";
+                    getFileButton.classList.add('show');
+                } else {
+                    countdownElement.textContent = `Please wait ${seconds} seconds...`;
+                }
+            }, 1000);
+        }
+
         function redirectToTelegram() {
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
@@ -55,6 +82,9 @@
                 alert("No token found in URL");
             }
         }
+
+        // Show the initial "Get Link" button
+        document.getElementById('get-link').classList.add('show');
     </script>
 </body>
 </html>
