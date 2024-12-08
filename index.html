@@ -5,7 +5,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #e6e6fa; /* Light purple background */
             color: #333;
             display: flex;
             justify-content: center;
@@ -16,13 +16,18 @@
         }
         .container {
             text-align: center;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         h1 {
             color: #007bff;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
         }
         button {
             background-color: #007bff;
@@ -33,25 +38,14 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .header-ad, .footer-ad {
-            margin: 20px 0;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-    <div class="header-ad">
-        <!-- Insert your header ad here -->
-        <img src="path/to/your-ad.jpg" alt="Header Ad">
-    </div>
     <div class="container">
+        <img src="https://i.ibb.co/DzPX5D3/your-image.jpg" alt="Image">
         <h1>Welcome!</h1>
         <p>Click the button below to get your video link.</p>
         <button onclick="redirectToCountdown()">Get Link</button>
-    </div>
-    <div class="footer-ad">
-        <!-- Insert your footer ad here -->
-        <img src="path/to/your-ad.jpg" alt="Footer Ad">
     </div>
 
     <script>
