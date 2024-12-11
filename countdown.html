@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Anda Sedia</title>
+    <title>Join My Channel</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,12 +63,10 @@
 <body>
     <div class="container">
         <img src="https://i.ibb.co/JqSwfKv/your-image.jpg" alt="Image">
-        <h1>Video Anda Sedia!</h1>
-        <p>Nama Fail: <span id="file-name"></span></p>
-        <p>Saiz Fail: <span id="file-size"></span></p>
-        <p>Tarikh Muat Naik: <span id="upload-date"></span></p>
+        <h1>Join My Channel!</h1>
+        <p>Click the button below to join our channel.</p>
         <div id="countdown"></div>
-        <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
+        <button id="get-file" onclick="redirectToTelegram()">Join Channel</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
     </div>
 
@@ -77,7 +75,7 @@
             const countdownElement = document.getElementById('countdown');
             const getFileButton = document.getElementById('get-file');
             let seconds = 4;
-            countdownElement.textContent = `Tolong tunggu ${seconds} saat...`;
+            countdownElement.textContent = `Please wait ${seconds} seconds...`;
             let interval = setInterval(() => {
                 seconds--;
                 if (seconds <= 0) {
@@ -85,19 +83,9 @@
                     countdownElement.textContent = "";
                     getFileButton.classList.add('show');
                 } else {
-                    countdownElement.textContent = `Tolong tunggu ${seconds} saat...`;
+                    countdownElement.textContent = `Please wait ${seconds} seconds...`;
                 }
             }, 1000);
-
-            // Fetch file details from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const fileName = urlParams.get('file_name');
-            const fileSize = urlParams.get('file_size');
-            const uploadDate = urlParams.get('upload_date');
-
-            document.getElementById('file-name').textContent = fileName;
-            document.getElementById('file-size').textContent = fileSize + " bytes";
-            document.getElementById('upload-date').textContent = uploadDate;
         }
 
         function redirectToTelegram() {
