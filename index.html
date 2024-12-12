@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Anda Sedia</title>
+    <title>Dapatkan Pautan Video Anda</title>
     <meta name="monetag" content="5f607e8b3932c7d9970ff176e1c087b6">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://alwingulla.com/88/tag.min.js" data-zone="119205" async data-cfasync="false"></script>
@@ -15,6 +15,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
         }
         .container {
             text-align: center;
@@ -31,11 +32,6 @@
             height: auto;
             margin-bottom: 20px;
         }
-        #countdown {
-            font-size: 20px;
-            margin: 20px 0;
-            color: #ff0000;
-        }
         button {
             background-color: #007bff;
             color: #fff;
@@ -44,22 +40,6 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            display: none;
-        }
-        button.show {
-            display: inline-block;
-        }
-        .link-button {
-            margin-top: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
         }
         footer {
             margin-top: 20px;
@@ -71,10 +51,9 @@
 <body>
     <div class="container">
         <img src="https://i.ibb.co/JqSwfKv/your-image.jpg" alt="Image">
-        <h1>Video Anda Sedia!</h1>
-        <div id="countdown"></div>
-        <button id="get-file" onclick="handleButtonClick()">Dapatkan Video</button>
-        <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
+        <h1>Selamat Datang!</h1>
+        <p>Klik butang di bawah untuk mendapatkan pautan video anda.</p>
+        <button onclick="redirectToCountdown()">Dapatkan Pautan</button>
     </div>
 
     <footer>
@@ -82,40 +61,16 @@
     </footer>
 
     <script>
-        function startCountdown() {
-            const countdownElement = document.getElementById('countdown');
-            const getFileButton = document.getElementById('get-file');
-            let seconds = 4;
-            countdownElement.textContent = `Tolong tunggu ${seconds} saat...`;
-            let interval = setInterval(() => {
-                seconds--;
-                if (seconds <= 0) {
-                    clearInterval(interval);
-                    countdownElement.textContent = "";
-                    getFileButton.classList.add('show');
-                } else {
-                    countdownElement.textContent = `Tolong tunggu ${seconds} saat...`;
-                }
-            }, 1000);
-        }
-
-        function handleButtonClick() {
+        function redirectToCountdown() {
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
-                const telegramLink = `https://t.me/aman687_bot?start=${encodeURIComponent(token)}`;
-                window.location.href = telegramLink;
-                window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
+                const countdownLink = `countdown.html?token=${encodeURIComponent(token)}`;
+                window.location.href = countdownLink;
             } else {
                 alert("No token found in URL");
             }
         }
-
-        // Start the countdown on page load
-        window.onload = startCountdown;
-
-        // Handle touch events
-        document.getElementById('get-file').addEventListener('touchstart', handleButtonClick);
     </script>
 </body>
 </html>
