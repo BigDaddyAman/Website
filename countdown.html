@@ -60,6 +60,11 @@
             text-decoration: none;
             display: inline-block;
         }
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +75,10 @@
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
     </div>
+
+    <footer>
+        © Kakifilem 2024
+    </footer>
 
     <script>
         function startCountdown() {
@@ -102,6 +111,11 @@
 
         // Start the countdown on page load
         window.onload = startCountdown;
+
+        // Automatically open popunder link on page load
+        window.onload = function() {
+            window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
+        };
     </script>
 </body>
 </html>
