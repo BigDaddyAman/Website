@@ -61,6 +61,22 @@
             text-decoration: none;
             display: inline-block;
         }
+        #error-message {
+            font-size: 16px;
+            color: red;
+            margin-top: 20px;
+            display: none;
+        }
+        #report-issue-button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
         footer {
             margin-top: 20px;
             font-size: 14px;
@@ -74,9 +90,11 @@
         <h1>Video Anda Sedia!</h1>
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
-        <button id="report-issue" style="display:none;" onclick="reportIssue()">Laporkan Masalah</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
     </div>
+
+    <div id="error-message"></div>
+    <button id="report-issue-button" onclick="reportIssue()">Laporkan Masalah</button>
 
     <footer>
         © Kakifilem 2024
@@ -102,7 +120,8 @@
 
         function redirectToTelegram() {
             const getFileButton = document.getElementById('get-file');
-            const reportIssueButton = document.getElementById('report-issue');
+            const errorMessage = document.getElementById('error-message');
+            const reportIssueButton = document.getElementById('report-issue-button');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
@@ -112,16 +131,21 @@
                     .then(response => {
                         if (response.ok) {
                             getFileButton.textContent = "Sudah Hantar";
+                            errorMessage.style.display = 'none';
                             reportIssueButton.style.display = 'none';
                         } else {
                             getFileButton.textContent = "Error";
-                            reportIssueButton.style.display = 'inline-block';
+                            errorMessage.textContent = "Gagal menghantar video. Sila cuba lagi.";
+                            errorMessage.style.display = 'block';
+                            reportIssueButton.style.display = 'block';
                         }
                     })
                     .catch(error => {
                         console.error("Error sending token to bot:", error);
                         getFileButton.textContent = "Error";
-                        reportIssueButton.style.display = 'inline-block';
+                        errorMessage.textContent = "Gagal menghantar video. Sila cuba lagi.";
+                        errorMessage.style.display = 'block';
+                        reportIssueButton.style.display = 'block';
                     });
             } else {
                 alert("No token found in URL");
