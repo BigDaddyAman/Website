@@ -87,6 +87,7 @@
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
+        <div id="error-message" style="color: red; display: none; margin-top: 20px;"></div>
     </div>
 
     <button id="report-issue-button" onclick="reportIssue()">Laporkan Masalah</button>
@@ -115,6 +116,7 @@
 
         function redirectToTelegram() {
             const getFileButton = document.getElementById('get-file');
+            const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
@@ -124,13 +126,16 @@
                     .then(response => {
                         if (response.ok) {
                             getFileButton.textContent = "Sudah Hantar";
+                            errorMessage.style.display = "none";  // Hide the error message if successful
                         } else {
-                            getFileButton.textContent = "Error";
+                            errorMessage.textContent = "Error: Failed to send the token.";
+                            errorMessage.style.display = "block";
                         }
                     })
                     .catch(error => {
                         console.error("Error sending token to bot:", error);
-                        getFileButton.textContent = "Error";
+                        errorMessage.textContent = "Error: Failed to send the token.";
+                        errorMessage.style.display = "block";
                     });
             } else {
                 alert("No token found in URL");
