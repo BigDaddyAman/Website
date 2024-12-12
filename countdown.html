@@ -73,7 +73,7 @@
         <img src="https://i.ibb.co/JqSwfKv/your-image.jpg" alt="Image">
         <h1>Video Anda Sedia!</h1>
         <div id="countdown"></div>
-        <button id="get-file" onclick="redirectToVideo()">Dapatkan Video</button>
+        <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
     </div>
 
@@ -99,13 +99,13 @@
             }, 1000);
         }
 
-        function redirectToVideo() {
+        function redirectToTelegram() {
             window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
-                const videoLink = `https://your-video-link.com?token=${encodeURIComponent(token)}`;
-                window.location.href = videoLink;
+                const telegramLink = `https://t.me/aman687_bot?start=${encodeURIComponent(token)}`;
+                window.location.href = telegramLink;
             } else {
                 alert("No token found in URL");
             }
