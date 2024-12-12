@@ -106,7 +106,7 @@
             const token = urlParams.get('token');
             if (token) {
                 const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
-                window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
+                window.open(telegramLink, '_blank', 'noopener,noreferrer');
                 fetch(telegramLink, { mode: 'no-cors' })
                     .then(response => {
                         getFileButton.textContent = "Sudah Hantar";
