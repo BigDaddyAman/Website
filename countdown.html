@@ -135,7 +135,7 @@
             const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
-            const videoName = "Heretic.2024.1080.WEB-DL.Malaysub";  // Hardcoded video name for testing
+            const videoName = urlParams.get('videoName');  // Get video name from URL parameter
             if (!videoName) {
                 alert("No video name found in URL");
                 return;
