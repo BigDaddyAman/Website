@@ -79,7 +79,8 @@
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
-        <button onclick="reportIssue()">Report Issue</button>
+        <!-- Commented out report button for testing -->
+        <!-- <button onclick="reportIssue()">Report Issue</button> -->
         <p id="error-message"></p>
     </div>
 
@@ -112,7 +113,7 @@
             const token = urlParams.get('token');
             if (token) {
                 const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
-                console.log(`Sending token to: ${telegramLink}`);  // Debugging line
+                console.log(`Sending token to: ${telegramLink}`);
                 fetch(telegramLink, { mode: 'no-cors' })
                     .then(response => {
                         getFileButton.textContent = "Sudah Hantar";
@@ -128,14 +129,15 @@
             }
         }
 
-        function reportIssue() {
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = "Reporting issue...";
-            // Perform the necessary actions to report the issue (e.g., sending a message to support)
-            setTimeout(() => {
-                errorMessage.textContent = "Issue reported successfully.";
-            }, 2000);
-        }
+        // Commented out for testing
+        // function reportIssue() {
+        //     const errorMessage = document.getElementById('error-message');
+        //     errorMessage.textContent = "Reporting issue...";
+        //     // Perform the necessary actions to report the issue (e.g., sending a message to support)
+        //     setTimeout(() => {
+        //         errorMessage.textContent = "Issue reported successfully.";
+        //     }, 2000);
+        // }
 
         // Start the countdown on page load
         window.onload = startCountdown;
