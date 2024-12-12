@@ -61,6 +61,16 @@
             text-decoration: none;
             display: inline-block;
         }
+        .report-button {
+            background-color: #ff0000; /* Red color for the report button */
+            color: #fff;
+            border: none;
+            padding: 5px 10px; /* Smaller size */
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
         footer {
             margin-top: 20px;
             font-size: 14px;
@@ -69,10 +79,6 @@
         #error-message {
             color: red;
             display: none;
-        }
-        .report-button {
-            background-color: #ff0000; /* Red color for the report button */
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -83,9 +89,9 @@
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">Join Channel</a>
-        <button class="report-button" onclick="reportIssue()">Report Issue</button>
         <p id="error-message"></p>
     </div>
+    <button class="report-button" onclick="reportIssue()">Report Issue</button>
 
     <footer>
         © Kakifilem 2024
@@ -126,12 +132,35 @@
         }
 
         function reportIssue() {
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = "Reporting issue...";
-            // Perform the necessary actions to report the issue (e.g., sending a message to support)
-            setTimeout(() => {
-                errorMessage.textContent = "Issue reported successfully.";
-            }, 2000);
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            if (token) {
+                const errorMessage = document.getElementById('error-message');
+                const reportMessage = `Report: Issue with video token ${token}`;
+                fetch('/report', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: reportMessage }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        errorMessage.textContent = "Issue reported successfully.";
+                    } else {
+                        errorMessage.textContent = "Failed to report issue.";
+                    }
+                    errorMessage.style.display = "block";
+                })
+                .catch(error => {
+                    console.error("Error reporting issue:", error);
+                    errorMessage.textContent = "Error: Failed to report issue.";
+                    errorMessage.style.display = "block";
+                });
+            } else {
+                alert("No token found in URL");
+            }
         }
 
         // Start the countdown on page load
