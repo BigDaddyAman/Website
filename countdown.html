@@ -120,7 +120,6 @@
             const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
-            const videoName = urlParams.get('video_name');
             if (token) {
                 const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
                 console.log(`Sending token to: ${telegramLink}`);
@@ -136,7 +135,11 @@
             const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
-            const videoName = urlParams.get('video_name');
+            const videoName = "Heretic.2024.1080.WEB-DL.Malaysub";  // Hardcoded video name for testing
+            if (!videoName) {
+                alert("No video name found in URL");
+                return;
+            }
             const reportMessage = `Report issue for video: ${videoName}, with token: ${token}`;
             fetch('http://localhost:5000/report', {  // Use the correct URL for your Flask app
                 method: 'POST',
