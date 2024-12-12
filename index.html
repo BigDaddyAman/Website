@@ -67,7 +67,6 @@
             if (token) {
                 const countdownLink = `countdown.html?token=${encodeURIComponent(token)}`;
                 window.location.href = countdownLink;
-                alert(`Redirecting to: ${countdownLink}`); // For debugging purposes
             } else {
                 alert("No token found in URL");
             }
