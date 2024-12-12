@@ -70,6 +70,10 @@
             color: red;
             display: none;
         }
+        .report-button {
+            background-color: #ff0000; /* Red color for the report button */
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -78,8 +82,8 @@
         <h1>Video Anda Sedia!</h1>
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
-        <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
-        <button onclick="reportIssue()">Report Issue</button>
+        <a href="https://t.me/kakifilem" class="link-button">Join Channel</a>
+        <button class="report-button" onclick="reportIssue()">Report Issue</button>
         <p id="error-message"></p>
     </div>
 
@@ -114,7 +118,7 @@
                 const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
                 console.log(`Sending token to: ${telegramLink}`);
                 window.open(telegramLink, '_blank', 'noopener,noreferrer');
-                getFileButton.textContent = "Sudah Hantar";
+                getFileButton.textContent = "Sudah Dihantar";
                 errorMessage.style.display = "none";  // Hide the error message if successful
             } else {
                 alert("No token found in URL");
