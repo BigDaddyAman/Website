@@ -62,17 +62,6 @@
             text-decoration: none;
             display: inline-block;
         }
-        #report-issue-button {
-            background-color: #ff0000;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            display: inline-block;
-        }
         footer {
             margin-top: 20px;
             font-size: 14px;
@@ -87,10 +76,7 @@
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
-        <div id="error-message" style="color: red; display: none; margin-top: 20px;"></div>
     </div>
-
-    <button id="report-issue-button" onclick="reportIssue()">Laporkan Masalah</button>
 
     <footer>
         © Kakifilem 2024
@@ -116,48 +102,22 @@
 
         function redirectToTelegram() {
             const getFileButton = document.getElementById('get-file');
-            const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
                 const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
                 window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
-                fetch(telegramLink)
+                fetch(telegramLink, { mode: 'no-cors' })
                     .then(response => {
-                        if (response.ok) {
-                            getFileButton.textContent = "Sudah Hantar";
-                            errorMessage.style.display = "none";  // Hide the error message if successful
-                        } else {
-                            errorMessage.textContent = "Error: Failed to send the token.";
-                            errorMessage.style.display = "block";
-                        }
+                        getFileButton.textContent = "Sudah Hantar";
                     })
                     .catch(error => {
                         console.error("Error sending token to bot:", error);
-                        errorMessage.textContent = "Error: Failed to send the token.";
-                        errorMessage.style.display = "block";
+                        getFileButton.textContent = "Error";
                     });
             } else {
                 alert("No token found in URL");
             }
-        }
-
-        function reportIssue() {
-            const message = "There was an issue with the video.";
-            fetch('http://your-server-ip:5000/report', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: message })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Report sent:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
         }
 
         // Start the countdown on page load
