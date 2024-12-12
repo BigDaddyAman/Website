@@ -120,14 +120,15 @@
             const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
-            if (token) {
+            const videoName = urlParams.get('videoName');  // Ensure videoName is fetched
+            if (token && videoName) {
                 const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
                 console.log(`Sending token to: ${telegramLink}`);
                 window.open(telegramLink, '_blank', 'noopener,noreferrer');
                 getFileButton.textContent = "Sudah Dihantar";
                 errorMessage.style.display = "none";  // Hide the error message if successful
             } else {
-                alert("No token found in URL");
+                alert("No token or video name found in URL");
             }
         }
 
