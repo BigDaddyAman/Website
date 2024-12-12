@@ -23,6 +23,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         h1 {
             color: #007bff;
@@ -165,8 +166,42 @@
             });
         }
 
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days*24*60*60*1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(nameEQ) == 0) {
+                    return c.substring(nameEQ.length, c.length);
+                }
+            }
+            return null;
+        }
+
+        function showAdOnce() {
+            const adCookie = getCookie("adShown");
+            if (!adCookie) {
+                // Show the ad and set the cookie
+                // Here you would insert the code to show the ad
+                setCookie("adShown", "true", 1); // 1 day expiration
+            }
+        }
+
         // Start the countdown on page load
-        window.onload = startCountdown;
+        window.onload = () => {
+            startCountdown();
+            showAdOnce();
+        }
     </script>
 </body>
 </html>
