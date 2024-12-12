@@ -136,7 +136,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             const reportMessage = `Report issue for video with token: ${token}`;
-            fetch('/report', {
+            fetch('http://localhost:5000/report', {  // Use the correct URL for your Flask app
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
