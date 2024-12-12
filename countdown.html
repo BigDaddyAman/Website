@@ -120,6 +120,7 @@
             const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
+            const videoName = urlParams.get('video_name');
             if (token) {
                 const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
                 console.log(`Sending token to: ${telegramLink}`);
@@ -135,7 +136,8 @@
             const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
-            const reportMessage = `Report issue for video with token: ${token}`;
+            const videoName = urlParams.get('video_name');
+            const reportMessage = `Report issue for video: ${videoName}, with token: ${token}`;
             fetch('http://localhost:5000/report', {  // Use the correct URL for your Flask app
                 method: 'POST',
                 headers: {
