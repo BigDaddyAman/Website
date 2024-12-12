@@ -45,6 +45,7 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
+            display: none;
         }
         button.show {
             display: inline-block;
@@ -61,14 +62,21 @@
             text-decoration: none;
             display: inline-block;
         }
+        #report-issue-button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+        }
         footer {
             margin-top: 20px;
             font-size: 14px;
             color: #555;
-        }
-        #error-message {
-            color: red;
-            display: none;
         }
     </style>
 </head>
@@ -79,9 +87,9 @@
         <div id="countdown"></div>
         <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
-        <button onclick="reportIssue()">Report Issue</button>
-        <p id="error-message"></p>
     </div>
+
+    <button id="report-issue-button" onclick="reportIssue()">Laporkan Masalah</button>
 
     <footer>
         © Kakifilem 2024
@@ -107,21 +115,22 @@
 
         function redirectToTelegram() {
             const getFileButton = document.getElementById('get-file');
-            const errorMessage = document.getElementById('error-message');
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
-                const telegramLink = `https://t.me/Requestfilemv3_bot?start=${encodeURIComponent(token)}`;
+                const telegramLink = `https://t.me/aman687_bot?start=${encodeURIComponent(token)}`;
                 window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
-                fetch(telegramLink, { mode: 'no-cors' })
+                fetch(telegramLink)
                     .then(response => {
-                        getFileButton.textContent = "Sudah Hantar";
-                        errorMessage.style.display = "none";  // Hide the error message if successful
+                        if (response.ok) {
+                            getFileButton.textContent = "Sudah Hantar";
+                        } else {
+                            getFileButton.textContent = "Error";
+                        }
                     })
                     .catch(error => {
                         console.error("Error sending token to bot:", error);
-                        errorMessage.textContent = "Error: Failed to send the token.";
-                        errorMessage.style.display = "block";
+                        getFileButton.textContent = "Error";
                     });
             } else {
                 alert("No token found in URL");
@@ -129,12 +138,8 @@
         }
 
         function reportIssue() {
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = "Reporting issue...";
-            // Perform the necessary actions to report the issue (e.g., sending a message to support)
-            setTimeout(() => {
-                errorMessage.textContent = "Issue reported successfully.";
-            }, 2000);
+            const reportLink = "https://t.me/your_support_channel_or_username";
+            window.open(reportLink, '_blank');
         }
 
         // Start the countdown on page load
