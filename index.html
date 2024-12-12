@@ -72,7 +72,7 @@
         <img src="https://i.ibb.co/JqSwfKv/your-image.jpg" alt="Image">
         <h1>Video Anda Sedia!</h1>
         <div id="countdown"></div>
-        <button id="get-file" onclick="redirectToTelegram()">Dapatkan Video</button>
+        <button id="get-file" onclick="handleButtonClick()">Dapatkan Video</button>
         <a href="https://t.me/kakifilem" class="link-button">View Channel</a>
     </div>
 
@@ -98,12 +98,13 @@
             }, 1000);
         }
 
-        function redirectToTelegram() {
+        function handleButtonClick() {
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
                 const telegramLink = `https://t.me/aman687_bot?start=${encodeURIComponent(token)}`;
                 window.location.href = telegramLink;
+                window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
             } else {
                 alert("No token found in URL");
             }
@@ -111,11 +112,6 @@
 
         // Start the countdown on page load
         window.onload = startCountdown;
-
-        // Add popunder link
-        document.querySelector('.link-button').addEventListener('click', function() {
-            window.open('https://luglawhaulsano.net/4/8642849', '_blank', 'noopener,noreferrer');
-        });
     </script>
 </body>
 </html>
